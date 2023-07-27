@@ -11,10 +11,11 @@
         <h1 id="title">Calculadora de salário</h1>
     </header>
     <main>
+      <form id="salary-form" action="/">
         <section>
           <label>
             <span>Salário bruto</span>
-            <input type="number" id="gross-salary" min="0">
+            <input type="number" id="gross-salary" min="0" required>
           </label>
       
           <fieldset id="insalubrity-label">
@@ -36,7 +37,10 @@
             </label>
           </fieldset>
         </section>
-      
+        <button type="submit" id="calculate">Calcular</button>
+
+      </form>
+
         <section>
           <label>
             <span>Salário líquido:</span>
@@ -53,7 +57,6 @@
             <p id="show-ir">150,00</p>
           </label>
         </section>
-        <button id="calculate">Calcular</button>
       </main>
       
     <script src="scripts/script.js"></script>
