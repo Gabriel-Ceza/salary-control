@@ -1,72 +1,84 @@
-/*INSS*/
-const grossSalary = document.getElementById('gross-salary');
-const calculateBtn = document.getElementById('calculate');
+const grossSalary = document.getElementById("gross-salary-input");
+const calculateBtn = document.getElementById("calculate");
 const radiobtns = document.querySelectorAll('input[name="insalubrity"]');
+const form = document.getElementById("basic-form");
+const showBaseSalary = document.getElementById('show-base-salary');
+const showInsalubrity = document.getElementById('show-insalubrity');
+const showInss = document.getElementById('show-inss');
+const showIr = document.getElementById('show-ir');
+const showNetSalary = document.getElementById('show-net-salary');
 
 const getInsalubrityValue = () => {
-    for (const btn of radiobtns) {
-      if (btn.checked) {
-        if (btn.value === '0') {
-          return 0;
-        } else if (btn.value === '20') {
-          return 264;
-        } else {
-          return 528;
-        }
+  for (const btn of radiobtns) {
+    if (btn.checked) {
+      if (btn.value === "0") {
+        return 0.00;
+      } else if (btn.value === "20") {
+        return 264.00;
+      } else {
+        return 528.00;
       }
     }
-    return 0;
-  };  
-
-const insalubrityPerCent = (netSalary) => {
-    return getInsalubrityValue()/netSalary;
-}
-
-const getInssPerCent = (netSalary) => {
-    if (netSalary <= 1320) {
-        const inssPerCent = 0.075;
-        return inssPerCent;
-    } else if (netSalary >= 1320.01 && netSalary <= 2571.29) {
-        const inssPerCent = 0.09 - (19.8/netSalary);
-        return inssPerCent
-    } else if (netSalary >= 2571.30 && netSalary <= 3856.94) {
-        const inssPerCent = 0.12 - (96.94/netSalary);
-        return inssPerCent
-    } else if (netSalary >= 3856.95 && netSalary <= 7507.49) {
-        const inssPerCent = 0.14 - (174.08/netSalary);
-        return inssPerCent
-    } else {
-        const inssPerCent = 876.95/netSalary;
-        return inssPerCent
-    }
-}
-
-const getIrPerCent = (netSalary) => {
-  if (netSalary >= 1903.99 && netSalary <= 2826.65) {
-      const irPerCent = 0.075;
-      return irPerCent;
-  } else if (netSalary >= 2826.66 && netSalary <= 3751.05) {
-      const irPerCent = 0.15 - (142.89/netSalary);
-      return irPerCent
-  } else if (netSalary >= 3751.06 && netSalary <= 4664.68) {
-      const irPerCent = 0.225 - (636.13/netSalary);
-      return irPerCent
-  } else if (netSalary >= 4664.68) {
-      const irPerCent = 0.275 - (869.36/netSalary);
-      return irPerCent
   }
-}
+  return 0;
+};
 
-calculateBtn.addEventListener('click', () => {
-  const netSalary = grossSalary.value - getInsalubrityValue();
-  const insalubrityPercent = insalubrityPerCent(netSalary);
-  const inssPercent = getInssPerCent(netSalary);
-  const irPercent = getIrPerCent(netSalary);
+const insalubrityPerCent = (baseSalary) => {
+  return getInsalubrityValue() / baseSalary;
+};
 
-  console.log("Net Salary:", netSalary);
-  console.log("Insalubrity Percentage:", insalubrityPercent);
-  console.log("INSS Percentage:", inssPercent);
-  console.log("IR Percentage:", irPercent);
+const getInssPerCent = (grossSalary) => {
+  if (grossSalary <= 1320) {
+    const inssPerCent = 0.075;
+    return inssPerCent;
+  } else if (grossSalary >= 1320.01 && grossSalary <= 2571.29) {
+    const inssPerCent = 0.09 - 19.8 / grossSalary;
+    return inssPerCent;
+  } else if (grossSalary >= 2571.3 && grossSalary <= 3856.94) {
+    const inssPerCent = 0.12 - 96.94 / grossSalary;
+    return inssPerCent;
+  } else if (grossSalary >= 3856.95 && grossSalary <= 7507.49) {
+    const inssPerCent = 0.14 - 174.08 / grossSalary;
+    return inssPerCent;
+  } else {
+    const inssPerCent = 876.95 / grossSalary;
+    return inssPerCent;
+  }
+};
 
-})
+const getIrPerCent = (irBase) => {
+  if (irBase < 1903.99) {
+    return 0;
+  } else if (irBase >= 1903.99 && irBase <= 2826.65) {
+    return (irBase * 0.075 - 142.80) / grossSalary.value;
+  } else if (irBase >= 2826.66 && irBase <= 3751.05) {
+    return (irBase * 0.15 - 354.8) / grossSalary.value
+  } else if (irBase >= 3751.06 && irBase <= 4664.68) {
+    return (irBase * 0.225 - 636.13) / grossSalary.value
+  } else if (irBase >= 4664.68) {
+    return (irBase * 0.275 - 869.36) / grossSalary.value
+  }
+};
 
+calculateBtn.addEventListener("click", (e) => {
+  const baseSalary = grossSalary.value - getInsalubrityValue();
+
+  const baseInss = grossSalary.value;
+  const inssPercent =
+    getInssPerCent(baseInss) * 100 > 0 ? getInssPerCent(baseInss) : 0;
+  const inssValue = inssPercent * grossSalary.value;
+
+  const irBase = grossSalary.value - inssValue;
+  const irPercent = getIrPerCent(irBase) * 100 > 0 ? getIrPerCent(irBase) : 0;
+  const irValue = irPercent * grossSalary.value;
+
+  const netSalary = grossSalary.value - inssValue - irValue;
+
+  showBaseSalary.innerText = baseSalary.toLocaleString('pt-br');
+  showInsalubrity.innerText = getInsalubrityValue().toLocaleString('pt-br');
+  showInss.innerText = inssValue.toLocaleString('pt-br');
+  showIr.innerText = irValue.toLocaleString('pt-br');
+  showNetSalary.innerText = netSalary.toLocaleString('pt-br');
+  
+  e.preventDefault();
+});
