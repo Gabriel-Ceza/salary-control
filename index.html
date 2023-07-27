@@ -1,65 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">5000
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/style.css">
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/style.css" />
     <title>Calculadora de salário</title>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <h1 id="title">Calculadora de salário</h1>
+      <h1 id="title">Calculadora de salário</h1>
     </header>
     <main>
-      <form id="salary-form" action="/">
+      <form id="basic-form">
         <section>
-          <label>
+          <label for="gross-salary-input" id="gross-salary-label">
             <span>Salário bruto</span>
-            <input type="number" id="gross-salary" min="0" required>
           </label>
-      
+          <input
+            id="gross-salary-input"
+            class="input"
+            autocomplete="off"
+            type="text"
+            placeholder="Salário bruto"
+            required
+          />
           <fieldset id="insalubrity-label">
             <legend>Insalubridade:</legend>
-      
             <label>
-              <input type="radio" name="insalubrity" value="0" checked>
+              <input type="radio" name="insalubrity" value="0" checked />
               <span>0</span>
             </label>
-      
             <label>
-              <input type="radio" name="insalubrity" value="20">
+              <input type="radio" name="insalubrity" value="20" />
               <span>20%</span>
             </label>
-      
             <label>
-              <input type="radio" name="insalubrity" value="40">
+              <input type="radio" name="insalubrity" value="40" />
               <span>40%</span>
             </label>
           </fieldset>
           <button id="calculate">Calcular</button>
         </section>
-        <button type="submit" id="calculate">Calcular</button>
-
       </form>
-
-        <section>
-          <label>
-            <span>Salário líquido:</span>
-            <p id="show-net-salary">5000,00</p>
-          </label>
-      
-          <label>
-            <span>Inss:</span>
-            <p id="show-inss">200,00</p>
-          </label>
-      
-          <label>
-            <span>Ir:</span>
-            <p id="show-ir">150,00</p>
-          </label>
-        </section>
-      </main>
-      
+      <section>       
+        <label>
+          <span>Salário base:</span>
+          <p id="show-base-salary"></p>
+        </label>
+        <label>
+          <span>Insalubridade:</span>
+          <p id="show-insalubrity"></p>
+        </label>
+        <label>
+          <span>Inss:</span>
+          <p id="show-inss"></p>
+        </label>
+        <label>
+          <span>Ir:</span>
+          <p id="show-ir"></p>
+        </label>
+        <label>
+          <span>Salário líquido:</span>
+          <p id="show-net-salary"></p>
+        </label>
+      </section>
+    </main>
     <script src="scripts/script.js"></script>
-</body>
+  </body>
 </html>
