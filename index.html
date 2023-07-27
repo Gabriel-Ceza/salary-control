@@ -11,6 +11,7 @@
         <h1 id="title">Calculadora de salário</h1>
     </header>
     <main>
+      <form id="salary-form" action="/">
         <section>
           <label>
             <span>Salário bruto</span>
@@ -35,8 +36,12 @@
               <span>40%</span>
             </label>
           </fieldset>
+          <button id="calculate">Calcular</button>
         </section>
-      
+        <button type="submit" id="calculate">Calcular</button>
+
+      </form>
+
         <section>
           <label>
             <span>Salário líquido:</span>
@@ -53,7 +58,6 @@
             <p id="show-ir">150,00</p>
           </label>
         </section>
-        <button id="calculate">Calcular</button>
       </main>
       
     <script src="scripts/script.js"></script>
