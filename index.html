@@ -13,15 +13,16 @@
     <main>
       <form id="basic-form">
         <section>
-          <label for="gross-salary-input" id="gross-salary-label">
-            <span>Salário bruto</span>
+          <label for="net-salary-input" id="net-salary-label">
+            <span>Salário líquido</span>
           </label>
           <input
-            id="gross-salary-input"
+            id="net-salary-input"
             class="input"
             autocomplete="off"
             type="text"
-            placeholder="Salário bruto"
+            placeholder="Salário líquido"
+            value="0"
             required
           />
           <fieldset id="insalubrity-label">
@@ -60,8 +61,8 @@
           <p id="show-ir"></p>
         </label>
         <label>
-          <span>Salário líquido:</span>
-          <p id="show-net-salary"></p>
+          <span>Salário bruto:</span>
+          <p id="show-gross-salary"></p>
         </label>
       </section>
     </main>

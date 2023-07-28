@@ -1,4 +1,4 @@
-const grossSalary = document.getElementById("gross-salary-input");
+const netSalaryInput = document.getElementById("net-salary-input");
 const calculateBtn = document.getElementById("calculate");
 const radiobtns = document.querySelectorAll('input[name="insalubrity"]');
 const form = document.getElementById("basic-form");
@@ -7,6 +7,10 @@ const showInsalubrity = document.getElementById('show-insalubrity');
 const showInss = document.getElementById('show-inss');
 const showIr = document.getElementById('show-ir');
 const showNetSalary = document.getElementById('show-net-salary');
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+})
 
 const getInsalubrityValue = () => {
   for (const btn of radiobtns) {
@@ -60,25 +64,34 @@ const getIrPerCent = (irBase) => {
   }
 };
 
+const getNetSalary = (grossSalary) => {
+    const baseInss = grossSalary;
+    const inssPercent =
+      getInssPerCent(baseInss) * 100 > 0 ? getInssPerCent(baseInss) : 0;
+    const inssValue = inssPercent * grossSalary;
+
+    const irBase = grossSalary - inssValue;
+    const irPercent = getIrPerCent(irBase) * 100 > 0 ? getIrPerCent(irBase) : 0;
+    const irValue = irPercent * grossSalary;
+
+    const netSalary = grossSalary - inssValue - irValue;
+    
+    const grossSalaryValue = 
+
+    return grossSalaryValue;
+}
+
 calculateBtn.addEventListener("click", (e) => {
-  const baseSalary = grossSalary.value - getInsalubrityValue();
-
-  const baseInss = grossSalary.value;
-  const inssPercent =
-    getInssPerCent(baseInss) * 100 > 0 ? getInssPerCent(baseInss) : 0;
-  const inssValue = inssPercent * grossSalary.value;
-
-  const irBase = grossSalary.value - inssValue;
-  const irPercent = getIrPerCent(irBase) * 100 > 0 ? getIrPerCent(irBase) : 0;
-  const irValue = irPercent * grossSalary.value;
-
-  const netSalary = grossSalary.value - inssValue - irValue;
-
-  showBaseSalary.innerText = baseSalary.toLocaleString('pt-br');
-  showInsalubrity.innerText = getInsalubrityValue().toLocaleString('pt-br');
-  showInss.innerText = inssValue.toLocaleString('pt-br');
-  showIr.innerText = irValue.toLocaleString('pt-br');
-  showNetSalary.innerText = netSalary.toLocaleString('pt-br');
-  
+  for (let index = netSalaryInput.value; index < 50000; index += 1) {
+    const[inssValue, irValue, netSalary] = getNetSalary(index);
+    if (netSalary === netSalaryInput.value) {
+      showBaseSalary.innerText = baseSalary.toLocaleString('pt-br');
+      showInsalubrity.innerText = getInsalubrityValue().toLocaleString('pt-br');
+      showInss.innerText = inssValue.toLocaleString('pt-br');
+      showIr.innerText = irValue.toLocaleString('pt-br');
+      showNetSalary.innerText = netSalary.toLocaleString('pt-br');
+      e.preventDefault();
+    }    
   e.preventDefault();
+  }
 });
