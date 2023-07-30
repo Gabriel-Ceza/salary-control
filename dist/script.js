@@ -54,7 +54,7 @@ const getIr = (irBase) => {
 const getValues = (initialValue) => {
     const inssBase = initialValue;
     const inss =
-    getInss(inssBase) * 100 > 0 ? getInss(inssBase) : 0;
+    getInss(inssBase) * 100 > 0 ? getInss(inssBase) : 0.00;
 
     const irBase = initialValue - inss;
     const ir = getIr(irBase) * 100 > 0 ? getIr(irBase) : 0.00;
@@ -67,7 +67,8 @@ const getValues = (initialValue) => {
 
 calculateBtn.addEventListener("click", (e) => {
   const inputValue = parseFloat(netSalaryInput.value);
-  for (let initialValue = inputValue; initialValue < 50000; initialValue += 0.01) {
+  const maxValue = parseFloat((inputValue + inputValue/0.74).toFixed(2));
+  for (let initialValue = inputValue; initialValue < maxValue; initialValue += 0.01) {
     const [netSalaryTryToFixed, inss, ir, baseSalary] = getValues(initialValue);
     if (netSalaryTryToFixed === inputValue) {    
       showBaseSalary.innerText = baseSalary.toLocaleString('pt-br', { minimumFractionDigits: 2 });
