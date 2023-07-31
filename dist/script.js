@@ -1,7 +1,6 @@
 const netSalaryInput = document.getElementById("net-salary-input");
 const calculateBtn = document.getElementById("calculate");
 const radiobtns = document.querySelectorAll('input[name="insalubrity"]');
-const form = document.getElementById("basic-form");
 const showBaseSalary = document.getElementById('show-base-salary');
 const showInsalubrity = document.getElementById('show-insalubrity');
 const showInss = document.getElementById('show-inss');
@@ -24,30 +23,30 @@ const getInsalubrityValue = () => {
 };
 
 const getInss = (baseInss) => {
-  if (baseInss <= 1320) {
+  if (baseInss <= 1302) {
     return  baseInss * 0.075;
-  } else if (baseInss >= 1320.01 && baseInss <= 2571.29) {
-    return  baseInss * 0.09 - 19.8  ;
+  } else if (baseInss >= 1302.01 && baseInss <= 2571.29) {
+    return  baseInss * 0.09 - 19.53  ;
   } else if (baseInss >= 2571.3 && baseInss <= 3856.94) {
-    return  baseInss * 0.12 - 96.94;
+    return  baseInss * 0.12 - 96.67;
   } else if (baseInss >= 3856.95 && baseInss <= 7507.49) {
-    return baseInss * 0.14 - 174.08;
+    return baseInss * 0.14 - 173.81;
   } else {
-    return 876.95;
+    return 877.25;
   }
 };
 
 const getIr = (irBase) => {
-  if (irBase < 1903.99) {
+  if (irBase < 2112.01) {
     return 0;
-  } else if (irBase >= 1903.99 && irBase <= 2826.65) {
-    return (irBase * 0.075 - 142.80);
+  } else if (irBase >= 2112.01 && irBase <= 2826.65) {
+    return (irBase * 0.075 - 158.4);
   } else if (irBase >= 2826.66 && irBase <= 3751.05) {
-    return (irBase * 0.15 - 354.8);
+    return (irBase * 0.15 - 370.4);
   } else if (irBase >= 3751.06 && irBase <= 4664.68) {
-    return (irBase * 0.225 - 636.13);
+    return (irBase * 0.225 - 651.73);
   } else if (irBase >= 4664.69) {
-    return (irBase * 0.275 - 869.36);
+    return (irBase * 0.275 - 884.96);
   }
 };
 
@@ -80,4 +79,10 @@ calculateBtn.addEventListener("click", (e) => {
     }    
   }
   e.preventDefault();
+});
+
+netSalaryInput.addEventListener('input', () => {
+  let value = numeroInput.value.replace(/\D/g, '');
+  value = netSalaryInput.value.toLocaleString('pt-br', { minimumFractionDigits: 2 });
+  netSalaryInput.value = value;
 });
