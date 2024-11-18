@@ -13,9 +13,9 @@ const getInsalubrityValue = () => {
       if (btn.value === "0") {
         return 0.00;
       } else if (btn.value === "20") {
-        return 264.00;
+        return 282.40;
       } else {
-        return 528.00;
+        return 564.80;
       }
     }
   }
@@ -23,30 +23,30 @@ const getInsalubrityValue = () => {
 };
 
 const getInss = (baseInss) => {
-  if (baseInss <= 1302) {
+  if (baseInss <= 1412) {
     return  baseInss * 0.075;
-  } else if (baseInss >= 1302.01 && baseInss <= 2571.29) {
-    return  baseInss * 0.09 - 19.53  ;
-  } else if (baseInss >= 2571.3 && baseInss <= 3856.94) {
-    return  baseInss * 0.12 - 96.67;
-  } else if (baseInss >= 3856.95 && baseInss <= 7507.49) {
-    return baseInss * 0.14 - 173.81;
+  } else if (baseInss >= 1412.01 && baseInss <= 2666.68) {
+    return  baseInss * 0.09 - 21.18  ;
+  } else if (baseInss >= 2666.69 && baseInss <= 4000.03) {
+    return  baseInss * 0.12 - 101.18;
+  } else if (baseInss >= 4000.04 && baseInss <= 7786.02) {
+    return baseInss * 0.14 - 181.18;
   } else {
-    return 877.25;
+    return 908.85;
   }
 };
 
 const getIr = (irBase) => {
-  if (irBase < 2112.01) {
+  if (irBase < 2259.20) {
     return 0;
-  } else if (irBase >= 2112.01 && irBase <= 2826.65) {
-    return (irBase * 0.075 - 158.4);
+  } else if (irBase >= 2259.21 && irBase <= 2826.65) {
+    return (irBase * 0.075 - 169.44);
   } else if (irBase >= 2826.66 && irBase <= 3751.05) {
-    return (irBase * 0.15 - 370.4);
+    return (irBase * 0.15 - 381.44);
   } else if (irBase >= 3751.06 && irBase <= 4664.68) {
-    return (irBase * 0.225 - 651.73);
+    return (irBase * 0.225 - 662.77);
   } else if (irBase >= 4664.69) {
-    return (irBase * 0.275 - 884.96);
+    return (irBase * 0.275 - 896.00);
   }
 };
 
